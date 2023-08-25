@@ -1,4 +1,4 @@
-const createProject = (title, todoArr) => {
+const Project = (title, todoArr) => {
     const getTitle = () => title;
     const getToDoArr = () => todoArr;
     const addToDo = (newToDo) => {
@@ -7,8 +7,8 @@ const createProject = (title, todoArr) => {
     const removeToDo = (idx) => {
         todoArr.splice(idx, 1);
     };
-
-    return {getTitle, getToDoArr, addToDo, removeToDo}
+    const getToDo = (idx) => todoArr[idx];
+    return {getTitle, getToDoArr, addToDo, removeToDo, getToDo}
 }
 
-export default createProject;
+export default Project;

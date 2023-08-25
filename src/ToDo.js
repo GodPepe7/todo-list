@@ -1,4 +1,4 @@
-const createToDo = (title, description, 
+const ToDo = (title, description, 
     dueDate, priority, notes) => {
     const complete = false
     const getTitle = () => title;
@@ -7,11 +7,11 @@ const createToDo = (title, description,
     const getPriority = () => priority;
     const getNotes = () => notes;
     const getComplete = () => complete;
-    const setComplete = () => {
+    const toggleComplete = () => {
         complete = !complete;
     }
     return {getTitle, getDesc, getDueDate, getPriority, 
-        getNotes, getComplete, setComplete};
+        getNotes, getComplete, toggleComplete};
 };
 
-export default createToDo;
+export default ToDo;
