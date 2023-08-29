@@ -1,0 +1,41 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    display: grid;
+    grid-template-columns: 200px auto;
+    grid-template-rows: 100px auto;
+}
+
+.header {
+    background-color: blue;
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    background: url('../img/list-check-svgrepo-com.svg');
+}
+
+.sidebar {
+    padding: 10px;
+    background-color: aliceblue;
+}
+
+.side-links:hover {
+    background-color: rgb(209, 219, 227);
+    cursor: pointer;
+}
