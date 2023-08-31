@@ -30,26 +30,38 @@
         <div class="projects-section">
             <h3>Projects</h3>
             <div class="item-container">
-                <div class="project-item">
-                    <a>test</a>
-                </div>
+                <template class="project-template">
+                    <div class="project-item side-links" data-projectIndex="">
+                        <img class="project-icon icon" alt="project">
+                        <a></a>
+                    </div>
+                </template>
             </div>
             <div class="side-links add-project">
                 <img class="create-project icon" alt="create-project">
                 <a>Add Project</a>
             </div>
-        </div>
-    </div>
-    <div class="main-container">
-        <h3>All ToDos</h3>
-        <div class="todo-item">
-            <p class="title">Example</p>
-            <div class='item-right'>
-                <p>08/29/2023</p>
-                <img class="delete icon" alt="Remove">
+            <div class="add-project-input">
+                <input type="text" placeholder="Title">
+                <div class="input-btns">
+                    <button class="add-btn">Add</button>
+                    <button class="cancel-btn">Cancel</button>
+                </div>
             </div>
         </div>
     </div>
+    <div class="main-container">
+        <h3 class="project-title"></h3>
+    </div>
+    <template class="todo-template">
+        <div class="todo-item">
+            <p class="title"></p>
+            <div class='item-right'>
+                <p class="due-date"></p>
+                <img class="delete icon" alt="Remove">
+            </div>
+        </div>
+    </template>
 </body>
 
 </html>
