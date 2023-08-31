@@ -16,7 +16,7 @@
   \**************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/noSourceMaps.js */ \"./node_modules/css-loader/dist/runtime/noSourceMaps.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/getUrl.js */ \"./node_modules/css-loader/dist/runtime/getUrl.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__);\n// Imports\n\n\n\nvar ___CSS_LOADER_URL_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ../img/list-check-svgrepo-com.svg */ \"./img/list-check-svgrepo-com.svg\"), __webpack_require__.b);\nvar ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));\nvar ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_0___);\n// Module\n___CSS_LOADER_EXPORT___.push([module.id, `* {\r\n    padding: 0;\r\n    margin: 0;\r\n}\r\n\r\na {\r\n    text-decoration: none;\r\n    color: black;\r\n}\r\n\r\nbody {\r\n    width: 100vw;\r\n    height: 100vh;\r\n    box-sizing: border-box;\r\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;\r\n    display: grid;\r\n    grid-template-columns: 200px auto;\r\n    grid-template-rows: 100px auto;\r\n}\r\n\r\n.header {\r\n    background-color: blue;\r\n    grid-column: 1 / -1;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n}\r\n\r\n.logo {\r\n    background: url(${___CSS_LOADER_URL_REPLACEMENT_0___});\r\n}\r\n\r\n.sidebar {\r\n    padding: 10px;\r\n    background-color: aliceblue;\r\n}\r\n\r\n.side-links:hover {\r\n    background-color: rgb(209, 219, 227);\r\n    cursor: pointer;\r\n}`, \"\"]);\n// Exports\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);\n\n\n//# sourceURL=webpack://todo-list/./src/styles.css?./node_modules/css-loader/dist/cjs.js");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/noSourceMaps.js */ \"./node_modules/css-loader/dist/runtime/noSourceMaps.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/getUrl.js */ \"./node_modules/css-loader/dist/runtime/getUrl.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__);\n// Imports\n\n\n\nvar ___CSS_LOADER_URL_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ../img/list-check-svgrepo-com.svg */ \"./img/list-check-svgrepo-com.svg\"), __webpack_require__.b);\nvar ___CSS_LOADER_URL_IMPORT_1___ = new URL(/* asset import */ __webpack_require__(/*! ../img/last-24-hours-svgrepo-com.svg */ \"./img/last-24-hours-svgrepo-com.svg\"), __webpack_require__.b);\nvar ___CSS_LOADER_URL_IMPORT_2___ = new URL(/* asset import */ __webpack_require__(/*! ../img/inbox-alt-1-svgrepo-com.svg */ \"./img/inbox-alt-1-svgrepo-com.svg\"), __webpack_require__.b);\nvar ___CSS_LOADER_URL_IMPORT_3___ = new URL(/* asset import */ __webpack_require__(/*! ../img/calendar-small-svgrepo-com.svg */ \"./img/calendar-small-svgrepo-com.svg\"), __webpack_require__.b);\nvar ___CSS_LOADER_URL_IMPORT_4___ = new URL(/* asset import */ __webpack_require__(/*! ../img/folder-plus-svgrepo-com.svg */ \"./img/folder-plus-svgrepo-com.svg\"), __webpack_require__.b);\nvar ___CSS_LOADER_URL_IMPORT_5___ = new URL(/* asset import */ __webpack_require__(/*! ../img/trash-svgrepo-com.svg */ \"./img/trash-svgrepo-com.svg\"), __webpack_require__.b);\nvar ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));\nvar ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_0___);\nvar ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_1___);\nvar ___CSS_LOADER_URL_REPLACEMENT_2___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_2___);\nvar ___CSS_LOADER_URL_REPLACEMENT_3___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_3___);\nvar ___CSS_LOADER_URL_REPLACEMENT_4___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_4___);\nvar ___CSS_LOADER_URL_REPLACEMENT_5___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_5___);\n// Module\n___CSS_LOADER_EXPORT___.push([module.id, `* {\r\n    padding: 0;\r\n    margin: 0;\r\n}\r\n\r\na {\r\n    text-decoration: none;\r\n    color: black;\r\n    font-size: 1em;\r\n}\r\n\r\nbody {\r\n    width: 100vw;\r\n    height: 100vh;\r\n    box-sizing: border-box;\r\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;\r\n    display: grid;\r\n    grid-template-columns: 250px auto;\r\n    grid-template-rows: 100px auto;\r\n}\r\n\r\n.header {\r\n    background-color: blue;\r\n    grid-column: 1 / -1;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    gap: 10px;\r\n}   \r\n\r\n.logo {\r\n    content: url(${___CSS_LOADER_URL_REPLACEMENT_0___});\r\n    width: 50px;\r\n    height: 50px;\r\n}\r\n\r\n.sidebar {\r\n    padding: 20px;\r\n    background-color: aliceblue;\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 20px;\r\n}\r\n\r\n.side-links {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 5px;\r\n    padding: 5px 10px;\r\n}\r\n\r\n.side-links:hover {\r\n    background-color: rgb(209, 219, 227);\r\n    cursor: pointer;\r\n}\r\n\r\n.today {\r\n    content: url(${___CSS_LOADER_URL_REPLACEMENT_1___});\r\n}\r\n\r\n.all {\r\n    content: url(${___CSS_LOADER_URL_REPLACEMENT_2___});\r\n}\r\n\r\n.week {\r\n    content: url(${___CSS_LOADER_URL_REPLACEMENT_3___});\r\n}\r\n\r\n.icon {\r\n    width: 1em;\r\n    height: 1em;\r\n}\r\n\r\n.create-project {\r\n    content: url(${___CSS_LOADER_URL_REPLACEMENT_4___});\r\n}\r\n\r\n.projects-section h3 {\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.main-container {\r\n    padding: 20px;\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 10px;\r\n}\r\n\r\n.todo-item {\r\n    display: flex;\r\n    background-color: aliceblue;\r\n    padding: 10px;\r\n    gap: 10px;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n    border-left: 5px yellow solid;\r\n    border-radius: 2px;\r\n}\r\n\r\n.item-right {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 10px;\r\n}\r\n\r\n.add-project {\r\n    justify-content: center;\r\n}\r\n\r\n.delete {\r\n    content: url(${___CSS_LOADER_URL_REPLACEMENT_5___});\r\n}`, \"\"]);\n// Exports\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);\n\n\n//# sourceURL=webpack://todo-list/./src/styles.css?./node_modules/css-loader/dist/cjs.js");
 
 /***/ }),
 
@@ -130,6 +130,46 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _sty
 
 /***/ }),
 
+/***/ "./img/calendar-small-svgrepo-com.svg":
+/*!********************************************!*\
+  !*** ./img/calendar-small-svgrepo-com.svg ***!
+  \********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"57a30dc9d5ba2144b591.svg\";\n\n//# sourceURL=webpack://todo-list/./img/calendar-small-svgrepo-com.svg?");
+
+/***/ }),
+
+/***/ "./img/folder-plus-svgrepo-com.svg":
+/*!*****************************************!*\
+  !*** ./img/folder-plus-svgrepo-com.svg ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"120b7e5dec6e0a775d44.svg\";\n\n//# sourceURL=webpack://todo-list/./img/folder-plus-svgrepo-com.svg?");
+
+/***/ }),
+
+/***/ "./img/inbox-alt-1-svgrepo-com.svg":
+/*!*****************************************!*\
+  !*** ./img/inbox-alt-1-svgrepo-com.svg ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"7abccb2c896efb1a275e.svg\";\n\n//# sourceURL=webpack://todo-list/./img/inbox-alt-1-svgrepo-com.svg?");
+
+/***/ }),
+
+/***/ "./img/last-24-hours-svgrepo-com.svg":
+/*!*******************************************!*\
+  !*** ./img/last-24-hours-svgrepo-com.svg ***!
+  \*******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"edf0598ff25c7df4faf3.svg\";\n\n//# sourceURL=webpack://todo-list/./img/last-24-hours-svgrepo-com.svg?");
+
+/***/ }),
+
 /***/ "./img/list-check-svgrepo-com.svg":
 /*!****************************************!*\
   !*** ./img/list-check-svgrepo-com.svg ***!
@@ -137,6 +177,16 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _sty
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 eval("module.exports = __webpack_require__.p + \"2be6f39f81db61ced310.svg\";\n\n//# sourceURL=webpack://todo-list/./img/list-check-svgrepo-com.svg?");
+
+/***/ }),
+
+/***/ "./img/trash-svgrepo-com.svg":
+/*!***********************************!*\
+  !*** ./img/trash-svgrepo-com.svg ***!
+  \***********************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"27178b4697c8fe649bcd.svg\";\n\n//# sourceURL=webpack://todo-list/./img/trash-svgrepo-com.svg?");
 
 /***/ })
 
