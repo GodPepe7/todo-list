@@ -51,17 +51,53 @@
         </div>
     </div>
     <div class="main-container">
-        <h3 class="project-title"></h3>
-    </div>
-    <template class="todo-template">
-        <div class="todo-item">
-            <p class="title"></p>
-            <div class='item-right'>
-                <p class="due-date"></p>
-                <img class="delete icon" alt="Remove">
-            </div>
+        <div class="todo-container">
+            <h3 class="project-title"></h3>
         </div>
-    </template>
+        <template class="todo-template">
+            <div class="todo-item">
+                <div class="item-left">
+                    <input type="checkbox">
+                    <p class="title"></p>
+                </div>
+                <div class='item-right'>
+                    <p class="due-date"></p>
+                    <img class="delete icon" alt="Remove">
+                </div>
+            </div>
+        </template>
+        <dialog id="todo-popup">
+            <form id="todo-form">
+                <h3>ToDo Form</h3>
+                <div class="form-upper">
+                    <div class="form-input-container">
+                        <label for="title">Title</label>
+                        <input type="text" id="title" name="title" required>
+                    </div>
+                    <div class="form-input-container">
+                        <label for="desc">Description</label>
+                        <textarea name="desc" id="desc" cols="30" rows="10" required></textarea>
+                    </div>
+                    <div class="form-input-container">
+                        <label for="duedate">Due Date</label>
+                        <input type="date" id="duedate" required>
+                    </div>
+                    <div class="prio-select form-input-container">
+                        <label for="priority">Priority</label>
+                        <select form="todo-form" name="priority" id="priority" required>
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-btn-container">
+                    <button form="todo-form" class="add-btn">Add</button>
+                    <button type="reset" class="cancel-btn">Cancel</button>
+                </div>
+            </form>
+        </dialog>
+    </div>
 </body>
 
 </html>

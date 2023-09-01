@@ -7,7 +7,8 @@ const displayController = (() => {
         projectInputAddBtn = document.querySelector('.add-btn'),
         projectInputCancelBtn = document.querySelector('.cancel-btn'),
         projectInputText = document.querySelector('.add-project-input input'),
-        mainContainer = document.querySelector('.main-container');
+        mainContainer = document.querySelector('.main-container'),
+        todoContainer = document.querySelector('.todo-container')
     const allBtn = document.querySelector('#all-link');
     
     const addProjectBtnHandler = () => {
@@ -51,7 +52,7 @@ const displayController = (() => {
     }
 
     const clearMainContent = () => {
-        mainContainer.replaceChildren();
+        todoContainer.replaceChildren();
     }
 
     const createProject = (title, idx) => {
@@ -62,6 +63,9 @@ const displayController = (() => {
         clone.querySelector('.project-item').dataset.projectIndex = idx;
         clone.addEventListener('click', clickProjectBtnHandler);
         itemContainer.append(clone);
+        const addToDoHTML = createAddToDoHTML();
+        addToDoHTML.addEventListener('click', addToDoBtnHandler)
+        mainContainer.append(addToDoHTML);
     }
 
     const displayProject = (title, todos) => {
@@ -70,13 +74,13 @@ const displayController = (() => {
         projectTitleHTML.textContent = title;
         projectTitleHTML.className = 'project-title';
         projectTitleHTML.textContent = title; 
-        const todoContainer = document.createDocumentFragment();
-        todoContainer.append(projectTitleHTML);
+        const todoFragment = document.createDocumentFragment();
+        todoFragment.append(projectTitleHTML);
         todos.forEach((todo) => {
             const todoHTML = createToDoHTML(todo);
-            todoContainer.append(todoHTML);
+            todoFragment.append(todoHTML);
         })
-        mainContainer.append(todoContainer);
+        todoContainer.append(todoFragment);
     };
     
     const createToDoHTML = (todo) => {
@@ -91,9 +95,22 @@ const displayController = (() => {
         titleHTML.textContent = title;
         const dueHTML = clone.querySelector('.due-date');
         dueHTML.textContent = dueDate;
-        clone.className += prio;
+        clone.querySelector('.todo-item').className += ' ' + prio;
         return clone;
     };
+
+    const createAddToDoHTML = () => {
+        const template = document.querySelector(".add-project");
+        const clone = template.cloneNode(true);
+        clone.querySelector('a').textContent = 'Add ToDo';
+        clone.querySelector('img').className = 'todo-icon icon';
+        return clone;
+    }
+
+    const addToDoBtnHandler = () => {
+        const dialog = document.querySelector('#todo-popup');
+        dialog.show();
+    }
 
     return {createProject, displayProject}
 })();
