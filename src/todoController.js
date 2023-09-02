@@ -3,25 +3,43 @@ import ToDo from "./ToDo";
 import displayController from "./displayController";
 
 const todoController = (() => {
-    const testProject = ToDo('test', 'this is a test project', '01/09/2023', 'high')
     const defaultProject = Project('default', []);
     const projectList = [defaultProject];
     let activeProject = defaultProject;
 
     const createProject = (title) => {
-        const newProject = Project(title, [testProject, testProject]);
+        const newProject = Project(title, []);
         activeProject = newProject;
         projectList.push(newProject);
         const idx = projectList.length - 1;
-        displayController.createProject(title, idx);
-        displayController.displayProject(activeProject.getTitle(), activeProject.getToDoArr());
     };
 
-    const addToDo = (title, description, dueDate, priority, notes) => {
-        const newToDo = ToDo(title, description, dueDate, priority, notes);
+    const getActiveProjectID = () => {
+        return projectList.indexOf(activeProject);
+    }
+
+    const addToDo = (title, description, dueDate, priority) => {
+        const newToDo = ToDo(title, description, dueDate, priority);
         activeProject.addToDo(newToDo);
-        //DOM
+        // displayController.displayProject(activeProject.getTitle(), activeProject.getToDoArr());
     };
+
+    const getCurrentTitleAndToDos = () => {
+        const title = activeProject.getTitle();
+        const todoArr = activeProject.getToDoArr();
+        const todos = [];
+        todoArr.forEach((todo) => {
+            const id = todo.getID();
+            const title = todo.getTitle();
+            const desc = todo.getDesc();
+            const due = todo.getDueDate();
+            const complete = todo.getComplete();
+            const prio = todo.getPriority()
+            const converted = {id, title, desc, due, prio, complete};
+            todos.push(converted);
+        });
+        return {title, todos};
+    }
 
     const changeComplete = (idx) => {
         const toBeChangedToDo = activeProject.getToDo(idx);
@@ -29,7 +47,7 @@ const todoController = (() => {
         //DOM
     };
 
-    const removeToDo = (idx) => {
+    const deleteToDo = (idx) => {
         activeProject.removeToDo(idx)
     };
 
@@ -37,12 +55,11 @@ const todoController = (() => {
         return projectList[idx]
     };
 
-    const changeActiveProject = (idx) => {
+    const switchProject = (idx) => {
         activeProject = projectList[idx];
-        displayController.displayProject(activeProject.title, activeProject.getToDoArr());
     };
 
-    return {createProject, changeActiveProject}
+    return {createProject, getCurrentTitleAndToDos, getActiveProjectID, switchProject, addToDo, deleteToDo}
 
 })();
 

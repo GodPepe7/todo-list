@@ -173,12 +173,20 @@ body {
     width: 17px;
 }
 
-.delete {
+.delete-icon {
     content: url('../img/trash-svgrepo-com.svg');
 }
 
-.add-project {
+.add-todo {
     justify-content: center;
+}
+
+#todo-popup {
+    margin: auto;
+}
+
+#todo-popup::backdrop {
+    backdrop-filter: blur(1px);
 }
 
 #todo-form {
@@ -207,4 +215,9 @@ body {
     align-items: center;
     justify-content: center;
     gap: 10px;
+}
+
+.delete-icon:hover {
+    cursor: pointer;
+    background-color: rgb(255, 81, 81);
 }

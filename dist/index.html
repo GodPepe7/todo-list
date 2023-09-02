@@ -54,6 +54,10 @@
         <div class="todo-container">
             <h3 class="project-title"></h3>
         </div>
+        <div class="side-links add-todo">
+            <img class="todo-icon icon" alt="add-todo">
+            <a>Add ToDo</a>
+        </div>
         <template class="todo-template">
             <div class="todo-item">
                 <div class="item-left">
@@ -62,7 +66,7 @@
                 </div>
                 <div class='item-right'>
                     <p class="due-date"></p>
-                    <img class="delete icon" alt="Remove">
+                    <img class="delete-icon icon" alt="Remove">
                 </div>
             </div>
         </template>
@@ -85,6 +89,7 @@
                     <div class="prio-select form-input-container">
                         <label for="priority">Priority</label>
                         <select form="todo-form" name="priority" id="priority" required>
+                            <option value="" disabled selected>Select Priority...</option>
                             <option value="high">High</option>
                             <option value="medium">Medium</option>
                             <option value="low">Low</option>
@@ -92,8 +97,9 @@
                     </div>
                 </div>
                 <div class="form-btn-container">
-                    <button form="todo-form" class="add-btn">Add</button>
-                    <button type="reset" class="cancel-btn">Cancel</button>
+                    <button formmethod="dialog" type="submit" form="todo-form" id="form-add"
+                        class="add-btn">Add</button>
+                    <button type="reset" id="form-cancel" class="cancel-btn">Cancel</button>
                 </div>
             </form>
         </dialog>
