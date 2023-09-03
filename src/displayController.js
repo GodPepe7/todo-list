@@ -102,12 +102,15 @@ const displayController = (() => {
         titleHTML.textContent = title;
         const dueHTML = clone.querySelector('.due-date');
         dueHTML.textContent = due;
-        const todoItemDiv = clone.querySelector('.todo-item');
+        const todoItemDiv = clone.querySelector('.todo-short');
         todoItemDiv.className += ' ' + prio;
         if(complete) {
             todoItemDiv.className += ' complete'
         }
         todoItemDiv.dataset.todoID = id;
+        const expandDescDiv = clone.querySelector('.todo-expand');
+        expandDescDiv.querySelector('.todo-desc').textContent = desc;
+        todoItemDiv.addEventListener('click', () => todoItemDivClickHandler(expandDescDiv));
         return clone;
     };
 
@@ -122,7 +125,12 @@ const displayController = (() => {
         clearToDoForm();
         dialog.showModal();
     };
-    addToDoBtn.addEventListener('click', addToDoBtnHandler)
+    addToDoBtn.addEventListener('click', addToDoBtnHandler);
+
+    const todoItemDivClickHandler = (expandDescDiv) => {
+        const displayState = expandDescDiv.style.display;
+        expandDescDiv.style.display = displayState === 'none' ? 'block' : 'none'; 
+    }
 
     const addToDoFormInputBtnHandler = () => {
         const title = formTitleInput.value;
@@ -158,6 +166,12 @@ const displayController = (() => {
     todayBtn.addEventListener('click', clickProjectBtnHandler);
     weekBtn.addEventListener('click', clickProjectBtnHandler);
     
+    // TODO:
+    // - fix date formatting
+    // - remove add button from home links
+    // - implement todo expanding for description
+    // - implement editing of todos and project
+
     return
 })();
 

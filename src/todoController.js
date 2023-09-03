@@ -60,11 +60,11 @@ const todoController = (() => {
         // IDs are just their index in the projectList and the first 3 are the
         // preset Projects (all, today, week)
         const ALL_TODAY_WEEK_ID = 3
-        if (id < ALL_TODAY_WEEK_ID) refreshAllProject(id); 
+        if (id < ALL_TODAY_WEEK_ID) refreshMainProject(id); 
         activeProject = projectList[id];
     };
     
-    const refreshAllProject = (id) => {
+    const refreshMainProject = (id) => {
         id = +id;
         const project = projectList[id];
         const refreshedToDos = [];

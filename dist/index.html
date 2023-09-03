@@ -61,13 +61,19 @@
         </div>
         <template class="todo-template">
             <div class="todo-item">
-                <div class="item-left">
-                    <input type="checkbox">
-                    <p class="title"></p>
+                <div class="todo-short">
+                    <div class="item-left">
+                        <input type="checkbox">
+                        <p class="title"></p>
+                    </div>
+                    <div class='item-right'>
+                        <p class="due-date"></p>
+                        <img class="delete-icon icon" alt="Remove">
+                    </div>
                 </div>
-                <div class='item-right'>
-                    <p class="due-date"></p>
-                    <img class="delete-icon icon" alt="Remove">
+                <div class="todo-expand">
+                    <h4>Description</h4>
+                    <p class="todo-desc">This is a Description</p>
                 </div>
             </div>
         </template>

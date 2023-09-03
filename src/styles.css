@@ -139,7 +139,7 @@ body {
     gap: 10px;
 }
 
-.todo-item {
+.todo-short {
     display: flex;
     padding: 10px;
     gap: 10px;
@@ -149,21 +149,28 @@ body {
     border: 1px solid black;
 }
 
-.todo-item:hover {
+.todo-short:hover {
     background-color: aliceblue;
 }
 
-.todo-item.high {
+.todo-short.high {
     border-left: 5px red solid;
 }
 
-.todo-item.medium {
+.todo-short.medium {
     border-left: 5px yellow solid;
 }
 
-.todo-item.low {
+.todo-short.low {
     border-left: 5px green solid;
 }
+
+.todo-expand {
+    display: none;
+    padding: 10px;
+    background-color: rgb(247, 247, 247);
+}
+
 .item-left,
 .item-right {
     display: flex;
@@ -227,6 +234,5 @@ body {
 
 .complete {
     text-decoration: line-through;
-    background-color: rgb(150, 150, 150);
-    color: rgb(92, 92, 92);
+    background-color: rgba(47, 255, 0, 0.259);
 }
