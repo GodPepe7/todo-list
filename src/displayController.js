@@ -15,9 +15,10 @@ const displayController = (() => {
         formDueInput = document.querySelector('#duedate'),
         formPrioInput = document.querySelector('#priority'),
         addToDoBtn = document.querySelector('.add-todo'),
-        dialog = document.querySelector('#todo-popup')
-
-    const allBtn = document.querySelector('#all-link');
+        dialog = document.querySelector('#todo-popup'),
+        allBtn = document.querySelector('#all-link'),
+        todayBtn = document.querySelector('#today-link'),
+        weekBtn = document.querySelector('#week-link')
 
     const addProjectBtnHandler = () => {
         addProjectInputDiv.style.display = 'flex';
@@ -64,10 +65,6 @@ const displayController = (() => {
     };
     projectInputCancelBtn.addEventListener('click', cancelProjectInputBtnHandler);
 
-    const allBtnHandler = () => {
-
-    };
-
     const clickProjectBtnHandler = (e) => {
         const id = e.target.dataset.projectID;
         todoController.switchProject(id);
@@ -81,7 +78,6 @@ const displayController = (() => {
     const displayToDosOfProject = () => {
         clearMainContent();
         const { title, todos } = todoController.getCurrentTitleAndToDos();
-        console.log(todoController.getCurrentTitleAndToDos())
         const projectTitleHTML = document.createElement('h3');
         projectTitleHTML.textContent = title;
         projectTitleHTML.className = 'project-title';
@@ -95,20 +91,32 @@ const displayController = (() => {
     };
 
     const createToDoHTML = (todo) => {
-        const {id, title, desc, dueDate, prio, isComplete} = todo;
+        const {id, title, desc, due, prio, complete} = todo;
         const todoTemplate = document.querySelector('.todo-template');
         const clone = todoTemplate.content.cloneNode(true);
         const deleteToDoBtn = clone.querySelector('.delete-icon');
         deleteToDoBtn.addEventListener('click', deleteToDoBtnHandler);
+        const completeToDoBtn = clone.querySelector('input[type=checkbox]');
+        completeToDoBtn.addEventListener('click', completeToDoBtnHandler);
         const titleHTML = clone.querySelector('.todo-item .title');
         titleHTML.textContent = title;
         const dueHTML = clone.querySelector('.due-date');
-        dueHTML.textContent = dueDate;
-        const todoItemDiv = clone.querySelector('.todo-item')
+        dueHTML.textContent = due;
+        const todoItemDiv = clone.querySelector('.todo-item');
         todoItemDiv.className += ' ' + prio;
+        if(complete) {
+            todoItemDiv.className += ' complete'
+        }
         todoItemDiv.dataset.todoID = id;
         return clone;
     };
+
+    const completeToDoBtnHandler = (e) => {
+        const todoItemDiv = e.target.parentNode.parentNode;
+        const todoID = todoItemDiv.dataset.todoID;
+        todoController.toggleComplete(todoID);
+        displayToDosOfProject();
+    }
 
     const addToDoBtnHandler = () => {
         clearToDoForm();
@@ -119,7 +127,7 @@ const displayController = (() => {
     const addToDoFormInputBtnHandler = () => {
         const title = formTitleInput.value;
         const desc = formDescInput.value;
-        const due = formDueInput.value;
+        const due = formDueInput.valueAsDate;
         const prio = formPrioInput.value;
         todoController.addToDo(title, desc, due, prio);
         displayToDosOfProject();
@@ -129,7 +137,7 @@ const displayController = (() => {
     const clearToDoForm = () => {
         formTitleInput.value = ''
         formDescInput.value = '';
-        formDueInput.value = '';
+        formDueInput.valueAsDate = new Date();
         formPrioInput.selectedIndex = 0;
     };
 
@@ -140,10 +148,15 @@ const displayController = (() => {
     formCancelBtn.addEventListener('click', formCancelBtnHandler);
 
     const deleteToDoBtnHandler = (e) => {
-        const todoID = e.target.dataset.todoID;
+        const todoItemDiv = e.target.parentNode.parentNode;
+        const todoID = todoItemDiv.dataset.todoID;
         todoController.deleteToDo(todoID);
         displayToDosOfProject();
     };
+
+    allBtn.addEventListener('click', clickProjectBtnHandler);
+    todayBtn.addEventListener('click', clickProjectBtnHandler);
+    weekBtn.addEventListener('click', clickProjectBtnHandler);
     
     return
 })();

@@ -3,7 +3,7 @@ let idCounter = 0;
 const ToDo = (title, description, 
     dueDate, priority) => {
     const id = idCounter++;
-    const complete = false
+    let complete = false;
     const getID = () => id;
     const getTitle = () => title;
     const getDesc = () => description;
