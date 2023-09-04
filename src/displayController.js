@@ -43,15 +43,15 @@ const displayController = (() => {
     addProjectBtn.addEventListener('click', addProjectBtnHandler);
 
     const addProjectInputBtnHandler = () => {
-        const title = projectInputText.value
-        projectInputText.style.border = '1px black solid'
-        projectInputText.placeholder = 'Title'
+        const title = projectInputText.value;
+        projectInputText.style.border = '1px black solid';
+        projectInputText.placeholder = 'Title';
         if (title) {
             projectInputText.value = '';
             addProjectInputDiv.style.display = 'none';
             addProjectBtn.style.display = 'flex';
             todoController.createProject(title);
-            displayProjects(title);
+            displayProjects();
             displayToDosOfProject()
         } else {
             projectInputText.style.border = '2px red solid'
@@ -60,14 +60,15 @@ const displayController = (() => {
     };
 
     const createHTMLProject = (projectID, title) => {
-        console.log({projectID, title})
         const displayHTML = document.querySelector('#project-template')
         const clone = displayHTML.content.cloneNode(true);
-        const titleHolder = clone.querySelector('a');
-        titleHolder.textContent = title;
         const projectDiv = clone.querySelector('.project-item');
         projectDiv.dataset.projectID = projectID;
+        const titleHolder = projectDiv.querySelector('a');
+        titleHolder.textContent = title;
         projectDiv.addEventListener('click', clickProjectBtnHandler);
+        const editBtn = projectDiv.querySelector('.edit-icon');
+        editBtn.addEventListener('click', editProjectBtnHandler);
         return clone;
     }
     projectInputAddBtn.addEventListener('click', addProjectInputBtnHandler);
@@ -90,6 +91,33 @@ const displayController = (() => {
     const clearMainContent = () => {
         todoContainer.replaceChildren();
     }
+
+    const editProjectBtnHandler = (e) => {
+        e.stopPropagation();
+        const projectDiv = e.target.parentNode; 
+        const editProjectInputDiv = document.querySelector('.add-project-input').cloneNode(true);
+        projectDiv.after(editProjectInputDiv);
+        projectDiv.style.display = 'none';
+        editProjectInputDiv.style.display = 'flex';
+        const confirmEditBtn = editProjectInputDiv.querySelector('.add-btn');
+        const cancelEditBtn = editProjectInputDiv.querySelector('.cancel-btn');
+        confirmEditBtn.addEventListener('click', () => {
+            const id = projectDiv.dataset.projectID;
+            const titleInput = editProjectInputDiv.querySelector('.add-project-input input');
+            const title = titleInput.value;
+            confirmEditBtnHandler(id, title);
+        });
+        cancelEditBtn.addEventListener('click', cancelEditBtnHandler);
+    };
+
+    const confirmEditBtnHandler = (id, title) => {
+        todoController.editProjectTitle(id, title);
+        displayProjects();
+    };
+
+    const cancelEditBtnHandler = () => {
+        displayProjects();
+    };
 
     const displayToDosOfProject = () => {
         clearMainContent();
