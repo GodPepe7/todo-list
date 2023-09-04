@@ -15,11 +15,10 @@ const todoController = (() => {
         const newProject = Project(title, []);
         activeProject = newProject;
         projectList.push(newProject);
-        const idx = projectList.length - 1;
     };
 
     const getActiveProjectID = () => {
-        return projectList.indexOf(activeProject);
+        return activeProject.getID();
     }
 
     const addToDo = (title, description, dueDate, priority) => {
@@ -31,7 +30,6 @@ const todoController = (() => {
         const title = activeProject.getTitle();
         const todoArr = activeProject.getToDoArr();
         const todos = [];
-        console.log(todoArr);
         todoArr.forEach((todo) => {
             const id = todo.getID();
             const title = todo.getTitle();
@@ -57,10 +55,9 @@ const todoController = (() => {
     };
 
     const switchProject = (id) => {
-        // IDs are just their index in the projectList and the first 3 are the
-        // preset Projects (all, today, week)
-        const ALL_TODAY_WEEK_ID = 3
-        if (id < ALL_TODAY_WEEK_ID) refreshMainProject(id); 
+        // IDs are just counted up, so the IDs of all, today and week are 0,1,2
+        const AFTER_ALL_TODAY_WEEK_ID = 3
+        if (id < AFTER_ALL_TODAY_WEEK_ID) refreshMainProject(id); 
         activeProject = projectList[id];
     };
     
@@ -85,7 +82,6 @@ const todoController = (() => {
                 for (let i = 3; i < projectList.length; i++) {
                     const currentToDos = projectList[i].getToDoArr();
                     const onlyTodayToDos = currentToDos.filter(todo => {
-                        console.log(isThisWeek(todo.getDueDate()), { weekStartsOn: 1 });
                         return isThisWeek(todo.getDueDate(), { weekStartsOn: 1 });
                     });
                     refreshedToDos.push(...onlyTodayToDos);
@@ -95,7 +91,21 @@ const todoController = (() => {
         project.setToDoArr(refreshedToDos);
     }
 
-    return { createProject, toggleComplete, getCurrentTitleAndToDos, getActiveProjectID, switchProject, addToDo, deleteToDo, toggleComplete }
+    const editProjectTitle = (id, title) => {
+        projectList[id].setTitle(title);
+    };
+
+    const getTitlesWithID = () => {
+        const userProjects = projectList.slice(3);
+        const titlesWithID = userProjects.map((project) => {
+            const id = project.getID();
+            const title = project.getTitle();
+            return {id, title};
+        });
+        return titlesWithID;
+    } 
+
+    return { createProject, editProjectTitle, toggleComplete, getCurrentTitleAndToDos, getActiveProjectID, switchProject, addToDo, deleteToDo, toggleComplete, getTitlesWithID }
 
 })();
 

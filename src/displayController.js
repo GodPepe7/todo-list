@@ -20,6 +20,22 @@ const displayController = (() => {
         todayBtn = document.querySelector('#today-link'),
         weekBtn = document.querySelector('#week-link')
 
+    const clearProjects = () => {
+        itemContainer.replaceChildren();
+    }
+
+    const displayProjects = () => {
+        clearProjects();
+        const fragment = document.createDocumentFragment();
+        const titlesWithID = todoController.getTitlesWithID();
+        titlesWithID.forEach(({id, title}) => {
+            const projectDiv = createHTMLProject(id, title);
+            fragment.append(projectDiv);
+        })
+        itemContainer.append(fragment);
+    }
+    displayProjects();
+
     const addProjectBtnHandler = () => {
         addProjectInputDiv.style.display = 'flex';
         addProjectBtn.style.display = 'none';
@@ -35,7 +51,7 @@ const displayController = (() => {
             addProjectInputDiv.style.display = 'none';
             addProjectBtn.style.display = 'flex';
             todoController.createProject(title);
-            createProject(title);
+            displayProjects(title);
             displayToDosOfProject()
         } else {
             projectInputText.style.border = '2px red solid'
@@ -43,19 +59,19 @@ const displayController = (() => {
         }
     };
 
-    const createProject = (title) => {
-        const activeProjectID = todoController.getActiveProjectID()
-        const displayHTMl = document.querySelector('.project-template');
-        const clone = displayHTMl.content.cloneNode(true);
+    const createHTMLProject = (projectID, title) => {
+        console.log({projectID, title})
+        const displayHTML = document.querySelector('#project-template')
+        const clone = displayHTML.content.cloneNode(true);
         const titleHolder = clone.querySelector('a');
         titleHolder.textContent = title;
         const projectDiv = clone.querySelector('.project-item');
-        projectDiv.dataset.projectID = activeProjectID;
+        projectDiv.dataset.projectID = projectID;
         projectDiv.addEventListener('click', clickProjectBtnHandler);
-        itemContainer.append(clone);
+        return clone;
     }
     projectInputAddBtn.addEventListener('click', addProjectInputBtnHandler);
-
+    
     const cancelProjectInputBtnHandler = () => {
         projectInputText.style.border = '1px black solid'
         projectInputText.placeholder = 'Title'
