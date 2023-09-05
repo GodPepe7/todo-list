@@ -85,9 +85,16 @@ body {
     content: url('../img/edit-svgrepo-com.svg');
 }
 
+.edit-icon:hover {
+    cursor: pointer;
+    background-color: rgba(0, 255, 195, 0.275);
+}
+
 .todo-icon {
     content: url('../img/plus-large-svgrepo-com.svg');
 }
+
+
 
 .projects-section h3,
 .filter-container h3 {

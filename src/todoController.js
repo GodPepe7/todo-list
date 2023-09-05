@@ -57,15 +57,15 @@ const todoController = (() => {
     const switchProject = (id) => {
         // IDs are just counted up, so the IDs of all, today and week are 0,1,2
         const AFTER_ALL_TODAY_WEEK_ID = 3
-        if (id < AFTER_ALL_TODAY_WEEK_ID) refreshMainProject(id); 
+        if (id < AFTER_ALL_TODAY_WEEK_ID) refreshMainProject(id);
         activeProject = projectList[id];
     };
-    
+
     const refreshMainProject = (id) => {
         id = +id;
         const project = projectList[id];
         const refreshedToDos = [];
-        switch(id) {
+        switch (id) {
             case 0:
                 for (let i = 3; i < projectList.length; i++) {
                     refreshedToDos.push(...projectList[i].getToDoArr());
@@ -100,12 +100,37 @@ const todoController = (() => {
         const titlesWithID = userProjects.map((project) => {
             const id = project.getID();
             const title = project.getTitle();
-            return {id, title};
+            return { id, title };
         });
         return titlesWithID;
-    } 
+    }
 
-    return { createProject, editProjectTitle, toggleComplete, getCurrentTitleAndToDos, getActiveProjectID, switchProject, addToDo, deleteToDo, toggleComplete, getTitlesWithID }
+    const editToDo = (changedProject) => {
+        const { id, title, desc, due, prio, complete } = changedProject;
+        const todo = activeProject.getToDo(id);
+        todo.setTitle(title);
+        todo.setDesc(desc);
+        todo.setDueDate(due);
+        todo.setPriority(prio);
+        todo.setComplete(complete)
+    }
+
+    const getToDo = (id) => {
+        const todo = activeProject.getToDo(id);
+        const title = todo.getTitle();
+        const desc = todo.getDesc();
+        const due = todo.getDueDate();
+        const complete = todo.getComplete();
+        const prio = todo.getPriority();
+        console.log(prio);
+        return { id, title, desc, due, prio, complete };
+    }
+
+    return {
+        createProject, editProjectTitle, toggleComplete,
+        getCurrentTitleAndToDos, getActiveProjectID, switchProject, getToDo,
+        addToDo, deleteToDo, toggleComplete, getTitlesWithID, editToDo
+    }
 
 })();
 

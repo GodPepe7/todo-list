@@ -18,7 +18,8 @@ const displayController = (() => {
         dialog = document.querySelector('#todo-popup'),
         allBtn = document.querySelector('#all-link'),
         todayBtn = document.querySelector('#today-link'),
-        weekBtn = document.querySelector('#week-link')
+        weekBtn = document.querySelector('#week-link'),
+        mainContent = document.querySelector('.main-container')
 
     const clearProjects = () => {
         itemContainer.replaceChildren();
@@ -52,7 +53,7 @@ const displayController = (() => {
             addProjectBtn.style.display = 'flex';
             todoController.createProject(title);
             displayProjects();
-            displayToDosOfProject()
+            displayToDosOfProject();
         } else {
             projectInputText.style.border = '2px red solid'
             projectInputText.placeholder = 'Must be filled out!'
@@ -67,7 +68,7 @@ const displayController = (() => {
         const titleHolder = projectDiv.querySelector('a');
         titleHolder.textContent = title;
         projectDiv.addEventListener('click', clickProjectBtnHandler);
-        const editBtn = projectDiv.querySelector('.edit-icon');
+        const editBtn = projectDiv.querySelector('#edit-project');
         editBtn.addEventListener('click', editProjectBtnHandler);
         return clone;
     }
@@ -138,6 +139,8 @@ const displayController = (() => {
         const {id, title, desc, due, prio, complete} = todo;
         const todoTemplate = document.querySelector('.todo-template');
         const clone = todoTemplate.content.cloneNode(true);
+        const editToDoBtn = clone.querySelector('.edit-icon');
+        editToDoBtn.addEventListener('click', editToDoBtnHandler);
         const deleteToDoBtn = clone.querySelector('.delete-icon');
         deleteToDoBtn.addEventListener('click', deleteToDoBtnHandler);
         const completeToDoBtn = clone.querySelector('input[type=checkbox]');
@@ -159,6 +162,7 @@ const displayController = (() => {
     };
 
     const completeToDoBtnHandler = (e) => {
+        e.stopPropagation();
         const todoItemDiv = e.target.parentNode.parentNode;
         const todoID = todoItemDiv.dataset.todoID;
         todoController.toggleComplete(todoID);
@@ -198,6 +202,49 @@ const displayController = (() => {
         dialog.close();
     };
     formCancelBtn.addEventListener('click', formCancelBtnHandler);
+    
+    const editToDoBtnHandler = (e) => {
+        e.stopPropagation();
+        const todoItemDiv = e.target.parentNode.parentNode;
+        const todoID = todoItemDiv.dataset.todoID;
+        const currentToDo = todoController.getToDo(todoID);
+        const complete = currentToDo.complete;
+        const currentDate = currentToDo.due;
+        const currentPrio = currentToDo.prio;
+        const editDialog = dialog.cloneNode(true);
+        mainContent.append(editDialog);
+        setFormWithCurrentToDoValues(currentDate, currentPrio, editDialog);
+        editDialog.showModal();
+        const confirmEditToDoBtn = editDialog.querySelector('#form-add');
+        const cancelEditToDoBtn = editDialog.querySelector('#form-cancel');
+        confirmEditToDoBtn.textContent = 'Confirm';
+        confirmEditToDoBtn.addEventListener('click', () => confirmEditToDoBtnHandler(todoID, complete, editDialog));
+        cancelEditToDoBtn.addEventListener('click', () => cancelEditToDoBtnHandler(editDialog));
+    }
+    
+    const setFormWithCurrentToDoValues = (date, prio, editDialog) => {
+        editDialog.querySelector('#duedate').valueAsDate = date;
+        console.log(prio);
+        editDialog.querySelector('#priority').value = prio;
+        console.log(editDialog.querySelector('#priority').value)
+    };
+
+    const confirmEditToDoBtnHandler = (id, complete, editDialog) => {
+        const title = editDialog.querySelector('#title').value
+        const desc = editDialog.querySelector('#desc').value
+        const due = editDialog.querySelector('#duedate').valueAsDate
+        const prio = editDialog.querySelector('#priority').value
+        
+        todoController.editToDo({id, title, desc, due, prio, complete});
+        editDialog.close();
+        displayToDosOfProject();
+    };
+
+
+
+    const cancelEditToDoBtnHandler = (editDialog) => {
+        editDialog.close()
+    };
 
     const deleteToDoBtnHandler = (e) => {
         const todoItemDiv = e.target.parentNode.parentNode;
@@ -213,8 +260,8 @@ const displayController = (() => {
     // TODO:
     // - fix date formatting
     // - remove add button from home links
-    // - implement todo expanding for description
-    // - implement editing of todos and project
+    // - implement editing of todos
+    // - validation of todo form (stop eventlistener from triggering on not valid input)
 
     return
 })();
