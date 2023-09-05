@@ -38,27 +38,32 @@ const todoController = (() => {
             const desc = todo.getDesc();
             const due = todo.getDueDate();
             const complete = todo.getComplete();
-            const prio = todo.getPriority()
+            const prio = todo.getPriority();
             const converted = { id, title, desc, due, prio, complete };
             todos.push(converted);
         });
         return { title, todos };
     }
 
+    const getProjectOfToDo = (id) => {
+        const projectsWithToDo = projectList.filter(project => project.getToDo(id));
+        const project = projectsWithToDo[projectsWithToDo.length - 1];
+        return project;
+    };
+
     const toggleComplete = (id) => {
         id = +id;
-        const todo = activeProject.getToDo(id);
+        const projectOfToDo = getProjectOfToDo(id);
+        const todo = projectOfToDo.getToDo(id);
         todo.toggleComplete();
-        saveProjectToLocalStorage(activeProject);
+        saveProjectToLocalStorage(projectOfToDo);
     };
 
     const deleteToDo = (id) => {
         id = +id;
-        const projectsWithToDo = projectList.filter(project => project.getToDo(id));
-        projectsWithToDo.forEach(project => project.removeToDo(id))
-        const project = projectsWithToDo[projectsWithToDo.length - 1];
-        project.removeToDo(id);
-        saveProjectToLocalStorage(project);
+        const projectOfToDo = getProjectOfToDo(id);
+        projectOfToDo.removeToDo(id);
+        saveProjectToLocalStorage(projectOfToDo);
     };
 
     const switchProject = (id) => {
@@ -113,15 +118,16 @@ const todoController = (() => {
         return titlesWithID;
     }
 
-    const editToDo = (changedProject) => {
-        const { id, title, desc, due, prio, complete } = changedProject;
+    const editToDo = (newTodo) => {
+        const { id, title, desc, due, prio, complete } = newTodo;
         const todo = activeProject.getToDo(id);
         todo.setTitle(title);
         todo.setDesc(desc);
         todo.setDueDate(due);
         todo.setPriority(prio);
         todo.setComplete(complete);
-        saveProjectToLocalStorage(activeProject);
+        const projectOfToDo = getProjectOfToDo(id);
+        saveProjectToLocalStorage(projectOfToDo);
     }
 
     const getToDo = (id) => {
@@ -180,13 +186,7 @@ const todoController = (() => {
             projectList.push(projectClone);
         }
         projectList.sort((p1, p2) => p1.getID() - p2.getID());
-        console.log(projectList[3].getID());
-        console.log(projectList[4].getID());
         refreshMainProject(0);
-    }
-
-    const deleteToDoOfLocalStorage = (id) => {
-        localStorage.removeItem(id);
     }
 
     return {

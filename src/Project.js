@@ -15,8 +15,8 @@ const Project = (title, todoArr) => {
     }
     const getToDo = (id) => todoArr.find((todo) => todo.getID() === +id);
     const setID = (newID) => {
-        id = newID;
-        idCounter = +newID;
+        id = +newID;
+        if(idCounter < newID) idCounter = +newID;
     };
     return { getID, getTitle, setTitle, getToDoArr, addToDo, removeToDo, getToDo, setToDoArr, setID }
 }

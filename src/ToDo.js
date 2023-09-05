@@ -20,7 +20,7 @@ const ToDo = (title, description,
     };
     const setID = (newID) => {
         id = newID;
-        idCounter = +id;
+        if(idCounter < newID) idCounter = +newID;
     };
     return {getTitle, getDesc, getDueDate, getPriority, 
         getComplete, toggleComplete, getID, setTitle, setDesc,

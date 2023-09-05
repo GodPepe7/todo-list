@@ -33,7 +33,7 @@ const displayController = (() => {
         titlesWithID.forEach(({ id, title }) => {
             const projectDiv = createHTMLProject(id, title);
             fragment.append(projectDiv);
-        })
+        });
         itemContainer.append(fragment);
     }
 
@@ -114,7 +114,7 @@ const displayController = (() => {
     const confirmEditBtnHandler = (id, title) => {
         todoController.editProjectTitle(id, title);
         displayProjects();
-        displayToDosOfProject()
+        displayToDosOfProject();
     };
 
     const cancelEditBtnHandler = () => {
@@ -124,7 +124,7 @@ const displayController = (() => {
     const displayToDosOfProject = () => {
         clearMainContent();
         const id = todoController.getActiveProjectID();
-        addToDoBtn.style.display = id < 3 ? 'none' : 'flex';    
+        addToDoBtn.style.display = id < 3 ? 'none' : 'flex';
         const { title, todos } = todoController.getCurrentTitleAndToDos();
         const projectTitleHTML = document.createElement('h3');
         projectTitleHTML.textContent = title;
@@ -136,7 +136,7 @@ const displayController = (() => {
             todoFragment.append(todoHTML);
         })
         todoContainer.append(todoFragment);
-        
+
     };
 
     const createToDoHTML = (todo) => {
@@ -185,7 +185,7 @@ const displayController = (() => {
     }
 
     const addToDoFormInputBtnHandler = () => {
-        if(formToDo.checkValidity()) {
+        if (formToDo.checkValidity()) {
             const title = formTitleInput.value;
             const desc = formDescInput.value;
             const due = formDueInput.valueAsDate;
@@ -230,14 +230,12 @@ const displayController = (() => {
 
     const setFormWithCurrentToDoValues = (date, prio, editDialog) => {
         editDialog.querySelector('#duedate').valueAsDate = date;
-        console.log(prio);
         editDialog.querySelector('#priority').value = prio;
-        console.log(editDialog.querySelector('#priority').value)
     };
 
     const confirmEditToDoBtnHandler = (id, complete, editDialog) => {
         const form = editDialog.querySelector('form');
-        if(form.checkValidity()){
+        if (form.checkValidity()) {
             const title = editDialog.querySelector('#title').value
             const desc = editDialog.querySelector('#desc').value
             const due = editDialog.querySelector('#duedate').valueAsDate
@@ -246,9 +244,7 @@ const displayController = (() => {
             editDialog.close();
             displayToDosOfProject();
         };
-        }
-
-
+    }
 
     const cancelEditToDoBtnHandler = (editDialog) => {
         editDialog.close()
@@ -265,7 +261,7 @@ const displayController = (() => {
     todayBtn.addEventListener('click', clickProjectBtnHandler);
     weekBtn.addEventListener('click', clickProjectBtnHandler);
 
-    return {displayProjects, displayToDosOfProject}
+    return { displayProjects, displayToDosOfProject }
 })();
 
 export default displayController;
