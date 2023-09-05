@@ -14,6 +14,7 @@ const displayController = (() => {
         formDescInput = document.querySelector('#desc'),
         formDueInput = document.querySelector('#duedate'),
         formPrioInput = document.querySelector('#priority'),
+        formToDo = document.querySelector('#todo-form'),
         addToDoBtn = document.querySelector('.add-todo'),
         dialog = document.querySelector('#todo-popup'),
         allBtn = document.querySelector('#all-link'),
@@ -123,7 +124,7 @@ const displayController = (() => {
     const displayToDosOfProject = () => {
         clearMainContent();
         const id = todoController.getActiveProjectID();
-        addToDoBtn.style.display = id < 3 ? 'none' : 'flex';
+        addToDoBtn.style.display = id < 3 ? 'none' : 'flex';    
         const { title, todos } = todoController.getCurrentTitleAndToDos();
         const projectTitleHTML = document.createElement('h3');
         projectTitleHTML.textContent = title;
@@ -184,17 +185,19 @@ const displayController = (() => {
     }
 
     const addToDoFormInputBtnHandler = () => {
-        const title = formTitleInput.value;
-        const desc = formDescInput.value;
-        const due = formDueInput.valueAsDate;
-        const prio = formPrioInput.value;
-        todoController.addToDo(title, desc, due, prio);
-        displayToDosOfProject();
+        if(formToDo.checkValidity()) {
+            const title = formTitleInput.value;
+            const desc = formDescInput.value;
+            const due = formDueInput.valueAsDate;
+            const prio = formPrioInput.value;
+            todoController.addToDo(title, desc, due, prio);
+            displayToDosOfProject();
+        }
     };
     formAddBtn.addEventListener('click', addToDoFormInputBtnHandler);
 
     const clearToDoForm = () => {
-        formTitleInput.value = ''
+        formTitleInput.value = '';
         formDescInput.value = '';
         formDueInput.valueAsDate = new Date();
         formPrioInput.selectedIndex = 0;
@@ -233,15 +236,17 @@ const displayController = (() => {
     };
 
     const confirmEditToDoBtnHandler = (id, complete, editDialog) => {
-        const title = editDialog.querySelector('#title').value
-        const desc = editDialog.querySelector('#desc').value
-        const due = editDialog.querySelector('#duedate').valueAsDate
-        const prio = editDialog.querySelector('#priority').value
-
-        todoController.editToDo({ id, title, desc, due, prio, complete });
-        editDialog.close();
-        displayToDosOfProject();
-    };
+        const form = editDialog.querySelector('form');
+        if(form.checkValidity()){
+            const title = editDialog.querySelector('#title').value
+            const desc = editDialog.querySelector('#desc').value
+            const due = editDialog.querySelector('#duedate').valueAsDate
+            const prio = editDialog.querySelector('#priority').value
+            todoController.editToDo({ id, title, desc, due, prio, complete });
+            editDialog.close();
+            displayToDosOfProject();
+        };
+        }
 
 
 
@@ -260,13 +265,7 @@ const displayController = (() => {
     todayBtn.addEventListener('click', clickProjectBtnHandler);
     weekBtn.addEventListener('click', clickProjectBtnHandler);
 
-    // TODO:
-    // - fix date formatting
-    // - remove add button from home links
-    // - validation of todo form (stop eventlistener from triggering on not valid input)
-    displayProjects();
-    displayToDosOfProject();
-    return
+    return {displayProjects, displayToDosOfProject}
 })();
 
 export default displayController;
