@@ -2,7 +2,7 @@ import Project from "./Project";
 import ToDo from "./ToDo";
 import isThisWeek from 'date-fns/isThisWeek';
 import isToday from 'date-fns/isToday';
-
+import parseISO from 'date-fns/parseISO'
 
 const todoController = (() => {
     const allToDosProject = Project('All', []);
@@ -15,6 +15,7 @@ const todoController = (() => {
         const newProject = Project(title, []);
         activeProject = newProject;
         projectList.push(newProject);
+        saveProjectToLocalStorage(newProject);
     };
 
     const getActiveProjectID = () => {
@@ -24,6 +25,7 @@ const todoController = (() => {
     const addToDo = (title, description, dueDate, priority) => {
         const newToDo = ToDo(title, description, dueDate, priority);
         activeProject.addToDo(newToDo);
+        saveProjectToLocalStorage(activeProject);
     };
 
     const getCurrentTitleAndToDos = () => {
@@ -47,11 +49,16 @@ const todoController = (() => {
         id = +id;
         const todo = activeProject.getToDo(id);
         todo.toggleComplete();
+        saveProjectToLocalStorage(activeProject);
     };
 
     const deleteToDo = (id) => {
         id = +id;
-        activeProject.removeToDo(id)
+        const projectsWithToDo = projectList.filter(project => project.getToDo(id));
+        projectsWithToDo.forEach(project => project.removeToDo(id))
+        const project = projectsWithToDo[projectsWithToDo.length - 1];
+        project.removeToDo(id);
+        saveProjectToLocalStorage(project);
     };
 
     const switchProject = (id) => {
@@ -93,6 +100,7 @@ const todoController = (() => {
 
     const editProjectTitle = (id, title) => {
         projectList[id].setTitle(title);
+        saveProjectToLocalStorage(activeProject);
     };
 
     const getTitlesWithID = () => {
@@ -112,7 +120,8 @@ const todoController = (() => {
         todo.setDesc(desc);
         todo.setDueDate(due);
         todo.setPriority(prio);
-        todo.setComplete(complete)
+        todo.setComplete(complete);
+        saveProjectToLocalStorage(activeProject);
     }
 
     const getToDo = (id) => {
@@ -122,15 +131,70 @@ const todoController = (() => {
         const due = todo.getDueDate();
         const complete = todo.getComplete();
         const prio = todo.getPriority();
-        console.log(prio);
         return { id, title, desc, due, prio, complete };
+    }
+    
+    const jsonToDoArr = (project) => {
+        const todoArr = project.getToDoArr();
+        const todoJSONArr = todoArr.map(todo => {
+            const id = todo.getID();
+            const title = todo.getTitle();
+            const desc = todo.getDesc();
+            const due = todo.getDueDate();
+            const complete = todo.getComplete();
+            const prio = todo.getPriority()
+            const values = { id, title, desc, due, prio, complete };
+            const todoJSON = JSON.stringify(values);
+            return todoJSON;
+        })
+        const todoJSONArrJSON = JSON.stringify(todoJSONArr);
+        return todoJSONArrJSON;
+    };
+
+    const saveProjectToLocalStorage = (project) => {
+        if(project.getID() < 3) return;
+        const todoJSONArrJSON = jsonToDoArr(project);
+        const id = project.getID();
+        const title = project.getTitle();
+        const projectSimplified = {title, todoJSONArrJSON};
+        const projectJSON = JSON.stringify(projectSimplified);
+        localStorage.setItem(id, projectJSON);
+    };
+    
+    const loadLocalStorage = () => {
+        for(let i = 0; i < localStorage.length; i++){
+            const id = localStorage.key(i);
+            const projectJSON = localStorage.getItem(localStorage.key(i));
+            const {title, todoJSONArrJSON} = JSON.parse(projectJSON);
+            const todoJSONArr = JSON.parse(todoJSONArrJSON);
+            const todoArr = todoJSONArr.map(todoJSON => {
+                const { id, title, desc, due, prio, complete } = JSON.parse(todoJSON);
+                const parsedDue = parseISO(due);
+                const todoClone = ToDo(title, desc, parsedDue, prio);
+                todoClone.setID(id);
+                todoClone.setComplete(complete);
+                return todoClone;
+            });
+            const projectClone = Project(title, todoArr);
+            projectClone.setID(id);
+            projectList.push(projectClone);
+        }
+        projectList.sort((p1, p2) => p1.getID() - p2.getID());
+        console.log(projectList[3].getID());
+        console.log(projectList[4].getID());
+        refreshMainProject(0);
+    }
+
+    const deleteToDoOfLocalStorage = (id) => {
+        localStorage.removeItem(id);
     }
 
     return {
         createProject, editProjectTitle, toggleComplete,
         getCurrentTitleAndToDos, getActiveProjectID, switchProject, getToDo,
-        addToDo, deleteToDo, toggleComplete, getTitlesWithID, editToDo
-    }
+        addToDo, deleteToDo, toggleComplete, getTitlesWithID, editToDo, 
+        loadLocalStorage
+    };
 
 })();
 

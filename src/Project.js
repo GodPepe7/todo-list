@@ -1,7 +1,7 @@
 let idCounter = 0;
 
 const Project = (title, todoArr) => {
-    const id = idCounter++
+    let id = idCounter++
     const getID = () => id;
     const getTitle = () => title;
     const setTitle = (newTitle) => title = newTitle;
@@ -14,7 +14,11 @@ const Project = (title, todoArr) => {
         todoArr = todoArr.filter(todo => todo.getID() !== id);
     }
     const getToDo = (id) => todoArr.find((todo) => todo.getID() === +id);
-    return { getID, getTitle, setTitle, getToDoArr, addToDo, removeToDo, getToDo, setToDoArr }
+    const setID = (newID) => {
+        id = newID;
+        idCounter = +newID;
+    };
+    return { getID, getTitle, setTitle, getToDoArr, addToDo, removeToDo, getToDo, setToDoArr, setID }
 }
 
 export default Project;

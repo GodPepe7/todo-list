@@ -2,7 +2,7 @@ let idCounter = 0;
 
 const ToDo = (title, description, 
     dueDate, priority) => {
-    const id = idCounter++;
+    let id = idCounter++;
     let complete = false;
     const getID = () => id;
     const getTitle = () => title;
@@ -17,10 +17,14 @@ const ToDo = (title, description,
     const setComplete = (newComplete) => complete = newComplete;
     const toggleComplete = () => {
         complete = !complete;
-    }
+    };
+    const setID = (newID) => {
+        id = newID;
+        idCounter = +id;
+    };
     return {getTitle, getDesc, getDueDate, getPriority, 
         getComplete, toggleComplete, getID, setTitle, setDesc,
-        setDueDate, setPriority, setComplete};
+        setDueDate, setPriority, setComplete, setID};
 };
 
 export default ToDo;
