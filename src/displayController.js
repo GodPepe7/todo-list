@@ -29,13 +29,12 @@ const displayController = (() => {
         clearProjects();
         const fragment = document.createDocumentFragment();
         const titlesWithID = todoController.getTitlesWithID();
-        titlesWithID.forEach(({id, title}) => {
+        titlesWithID.forEach(({ id, title }) => {
             const projectDiv = createHTMLProject(id, title);
             fragment.append(projectDiv);
         })
         itemContainer.append(fragment);
     }
-    displayProjects();
 
     const addProjectBtnHandler = () => {
         addProjectInputDiv.style.display = 'flex';
@@ -73,7 +72,7 @@ const displayController = (() => {
         return clone;
     }
     projectInputAddBtn.addEventListener('click', addProjectInputBtnHandler);
-    
+
     const cancelProjectInputBtnHandler = () => {
         projectInputText.style.border = '1px black solid'
         projectInputText.placeholder = 'Title'
@@ -95,7 +94,7 @@ const displayController = (() => {
 
     const editProjectBtnHandler = (e) => {
         e.stopPropagation();
-        const projectDiv = e.target.parentNode; 
+        const projectDiv = e.target.parentNode;
         const editProjectInputDiv = document.querySelector('.add-project-input').cloneNode(true);
         projectDiv.after(editProjectInputDiv);
         projectDiv.style.display = 'none';
@@ -114,6 +113,7 @@ const displayController = (() => {
     const confirmEditBtnHandler = (id, title) => {
         todoController.editProjectTitle(id, title);
         displayProjects();
+        displayToDosOfProject()
     };
 
     const cancelEditBtnHandler = () => {
@@ -122,6 +122,8 @@ const displayController = (() => {
 
     const displayToDosOfProject = () => {
         clearMainContent();
+        const id = todoController.getActiveProjectID();
+        addToDoBtn.style.display = id < 3 ? 'none' : 'flex';
         const { title, todos } = todoController.getCurrentTitleAndToDos();
         const projectTitleHTML = document.createElement('h3');
         projectTitleHTML.textContent = title;
@@ -133,10 +135,11 @@ const displayController = (() => {
             todoFragment.append(todoHTML);
         })
         todoContainer.append(todoFragment);
+        
     };
 
     const createToDoHTML = (todo) => {
-        const {id, title, desc, due, prio, complete} = todo;
+        const { id, title, desc, due, prio, complete } = todo;
         const todoTemplate = document.querySelector('.todo-template');
         const clone = todoTemplate.content.cloneNode(true);
         const editToDoBtn = clone.querySelector('.edit-icon');
@@ -151,7 +154,7 @@ const displayController = (() => {
         dueHTML.textContent = due;
         const todoItemDiv = clone.querySelector('.todo-short');
         todoItemDiv.className += ' ' + prio;
-        if(complete) {
+        if (complete) {
             todoItemDiv.className += ' complete'
         }
         todoItemDiv.dataset.todoID = id;
@@ -177,7 +180,7 @@ const displayController = (() => {
 
     const todoItemDivClickHandler = (expandDescDiv) => {
         const displayState = expandDescDiv.style.display;
-        expandDescDiv.style.display = displayState === 'none' ? 'block' : 'none'; 
+        expandDescDiv.style.display = displayState === 'none' ? 'block' : 'none';
     }
 
     const addToDoFormInputBtnHandler = () => {
@@ -202,7 +205,7 @@ const displayController = (() => {
         dialog.close();
     };
     formCancelBtn.addEventListener('click', formCancelBtnHandler);
-    
+
     const editToDoBtnHandler = (e) => {
         e.stopPropagation();
         const todoItemDiv = e.target.parentNode.parentNode;
@@ -221,7 +224,7 @@ const displayController = (() => {
         confirmEditToDoBtn.addEventListener('click', () => confirmEditToDoBtnHandler(todoID, complete, editDialog));
         cancelEditToDoBtn.addEventListener('click', () => cancelEditToDoBtnHandler(editDialog));
     }
-    
+
     const setFormWithCurrentToDoValues = (date, prio, editDialog) => {
         editDialog.querySelector('#duedate').valueAsDate = date;
         console.log(prio);
@@ -234,8 +237,8 @@ const displayController = (() => {
         const desc = editDialog.querySelector('#desc').value
         const due = editDialog.querySelector('#duedate').valueAsDate
         const prio = editDialog.querySelector('#priority').value
-        
-        todoController.editToDo({id, title, desc, due, prio, complete});
+
+        todoController.editToDo({ id, title, desc, due, prio, complete });
         editDialog.close();
         displayToDosOfProject();
     };
@@ -256,13 +259,13 @@ const displayController = (() => {
     allBtn.addEventListener('click', clickProjectBtnHandler);
     todayBtn.addEventListener('click', clickProjectBtnHandler);
     weekBtn.addEventListener('click', clickProjectBtnHandler);
-    
+
     // TODO:
     // - fix date formatting
     // - remove add button from home links
-    // - implement editing of todos
     // - validation of todo form (stop eventlistener from triggering on not valid input)
-
+    displayProjects();
+    displayToDosOfProject();
     return
 })();
 
